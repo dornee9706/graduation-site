@@ -59,6 +59,8 @@ else:
     photo_folder = f"photos/{username}"
 
     if os.path.exists(photo_folder):
+        st.write("照片資料夾路徑：", photo_folder)
+        st.write("資料夾內容：", os.listdir(photo_folder) if os.path.exists(photo_folder) else "不存在")
         photos = sorted(os.listdir(photo_folder))
 
         if photos:
@@ -73,4 +75,5 @@ else:
         st.session_state.logged_in = False
         st.session_state.username = ""
         st.rerun()
+
 
