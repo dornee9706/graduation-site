@@ -56,24 +56,30 @@ else:
     username = st.session_state.username
     st.success(f"歡迎你，{username}！")
 
-    photo_folder = f"photos/{username}"
+    photo_root = f"photos/{username}"
 
-    if os.path.exists(photo_folder):
-        st.write("照片資料夾路徑：", photo_folder)
-        st.write("資料夾內容：", os.listdir(photo_folder) if os.path.exists(photo_folder) else "不存在")
-        photos = sorted(os.listdir(photo_folder))
+if os.path.exists(photo_root):
+    found = False
 
-        if photos:
-            for photo in photos:
-                st.image(os.path.join(photo_folder, photo))
-        else:
-            st.info("目前還沒有照片")
-    else:
-        st.warning("找不到你的照片資料夾")
+    for subfolder in os.listdir(photo_root):
+        sub_path = os.path.join(photo_root, subfolder)
+
+        if os.path.isdir(sub_path):
+            for photo in os.listdir(sub_path):
+                if photo.lower().endswith((".jpg", ".png", ".jpeg")):
+                    st.image(os.path.join(sub_path, photo))
+                    found = True
+
+    if not found:
+        st.info("目前還沒有照片")
+else:
+    st.warning("找不到你的照片資料夾")
+
 
     if st.button("登出"):
         st.session_state.logged_in = False
         st.session_state.username = ""
         st.rerun()
+
 
 
