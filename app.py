@@ -18,7 +18,8 @@ creds = Credentials.from_service_account_info(
 )
 
 client = gspread.authorize(creds)
-sheet = client.open("graduation_users").sheet1
+sheet = client.open_by_key("1fVXXBkDEHqXYYMFB8QQXw6L6iWG-_Woe87Ihe6Db49M").sheet1
+
 rows = sheet.get_all_records()
 
 users = {r["username"]: r["password"] for r in rows}
@@ -60,4 +61,5 @@ if "user" in st.session_state:
             cell = sheet.find(st.session_state.user)
             sheet.update_cell(cell.row, 2, new_pw)
             st.success("密碼修改成功")
+
 
