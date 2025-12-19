@@ -64,6 +64,10 @@ if "user" in st.session_state:
             sheet.update_cell(cell.row, 2, new_pw)
             st.success("密碼修改成功")
 
+st.write(creds.service_account_email)
+
+
+
 
 
 
