@@ -2,7 +2,7 @@ import streamlit as st
 import gspread
 from google.oauth2.service_account import Credentials
 
-FOLDER_ID = "1FP6fcYQ-YfEXds4f56kfQxMC2ybPwFYb"
+FOLDER_ID = "1PSeyOmGZLsUte982xgB4t-DezSyY3KIFPuhxOoKF5tA"
 
 st.title("🎓 畢業照網站")
 
@@ -61,5 +61,6 @@ if "user" in st.session_state:
             cell = sheet.find(st.session_state.user)
             sheet.update_cell(cell.row, 2, new_pw)
             st.success("密碼修改成功")
+
 
 
